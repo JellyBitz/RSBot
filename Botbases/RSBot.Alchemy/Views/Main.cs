@@ -90,7 +90,7 @@ namespace RSBot.Alchemy.Views
                 ControlStyles.OptimizedDoubleBuffer,
                 true);
 
-            EventManager.SubscribeEvent("OnLoadCharacter", () => { Invoke(ReloadItemList); });
+            EventManager.SubscribeEvent("OnLoadCharacter", () => { Invoke((System.Action)ReloadItemList); });
 
             EventManager.SubscribeEvent("OnAlchemy", new Action<AlchemyType>(OnAlchemy));
 
@@ -109,7 +109,7 @@ namespace RSBot.Alchemy.Views
 
         private void OnAlchemy(AlchemyType type)
         {
-            Invoke(ReloadItemList);
+            Invoke((System.Action)ReloadItemList);
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace RSBot.Alchemy.Views
         /// <param name="e"></param>
         private void linkRefreshItemList_Click(object sender, EventArgs e)
         {
-            Invoke(ReloadItemList);
+            Invoke((System.Action)ReloadItemList);
         }
 
         /// <summary>
@@ -240,8 +240,8 @@ namespace RSBot.Alchemy.Views
 
             if (SelectedItem == null) return;
 
-            Invoke(() => PopulateAttributes(SelectedItem));
-            Invoke(() => PopulateMagicOptions(SelectedItem));
+            Invoke((System.Action)(() => PopulateAttributes(SelectedItem)));
+            Invoke((System.Action)(() => PopulateMagicOptions(SelectedItem)));
 
             lblDegree.Text = SelectedItem.Record.Degree.ToString();
             lblOptLevel.Text = $"+{SelectedItem.OptLevel}";

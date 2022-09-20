@@ -258,7 +258,14 @@ namespace RSBot.Core.Components
                     moveCommands.Add(line, curPos);
             }
 
-            return moveCommands.Count == 0 ? 0 : moveCommands.MinBy(c => c.Value.DistanceToPlayer()).Key;
+            var result = 0;
+            float minDist = 0;
+            foreach (var mCmd in moveCommands)
+            {
+                if (minDist == 0 || mCmd.Value.DistanceToPlayer() < minDist)
+                    result = mCmd.Key;
+            }
+            return result;
         }
     }
 }

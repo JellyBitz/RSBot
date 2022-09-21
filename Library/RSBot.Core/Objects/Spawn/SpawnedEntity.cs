@@ -215,10 +215,11 @@ namespace RSBot.Core.Objects.Spawn
                 finish = true;
             }
 
-            var dir = MathF.SinCos(Movement.Angle);
+            var dirCos = MathF.Cos(Movement.Angle);
+            var dirSin = MathF.Sin(Movement.Angle);
 
-            Movement.Source.XOffset += dir.Cos * totalChange;
-            Movement.Source.YOffset += dir.Sin * totalChange;
+            Movement.Source.XOffset += dirCos * totalChange;
+            Movement.Source.YOffset += dirSin * totalChange;
 
             if (finish)
                 StopMoving(Movement.Destination);
